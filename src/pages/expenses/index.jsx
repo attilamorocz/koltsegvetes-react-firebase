@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { auth } from "../../config/firebase-config";
 
+
 export const Expenses = () => {
   const { addTransaction } = useAddTransaction();
   const { transactions, transactionTotals } = useGetTransactions();
@@ -60,8 +61,10 @@ export const Expenses = () => {
               <p>{expenses} Ft</p>
             </div>
           </div>
+          <p className="add-new">Add new transaction</p>
           <form className="add-transaction" onSubmit={onSubmit}>
             <input
+              className="input"
               type="text"
               placeholder="Description"
               value={description}
@@ -69,12 +72,15 @@ export const Expenses = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
             <input
+              className="input"
               type="number"
               placeholder="Amount"
               value={transactionAmount}
               required
               onChange={(e) => setTransactionAmount(e.target.value)}
             />
+            <br></br>
+
             <input
               type="radio"
               id="expense"
@@ -82,7 +88,7 @@ export const Expenses = () => {
               checked={transactionType === "expense"}
               onChange={(e) => setTransactionType(e.target.value)}
             />
-            <label htmlFor="expense">Expense</label>
+            <label className="label" htmlFor="expense">Expense</label>
             <input
               type="radio"
               id="income"
@@ -90,9 +96,11 @@ export const Expenses = () => {
               checked={transactionType === "income"}
               onChange={(e) => setTransactionType(e.target.value)}
             />
-            <label htmlFor="income">Income</label>
+            <label className="label" htmlFor="income">Income</label>
 
             <button type="submit">Add Transaction</button>
+            
+            
           </form>
         </div>
         {profilePhoto && (
@@ -106,7 +114,7 @@ export const Expenses = () => {
         )}
       </div>
       <div className="transactions">
-        <h3>Transactions</h3>
+        <h3>History</h3>
         <ul>
           {transactions.map((transaction) => {
             const { description, transactionAmount, transactionType } =
